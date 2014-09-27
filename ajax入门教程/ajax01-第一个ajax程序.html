@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第一个ajax程序</title>
+	<script>
+	window.onload =  function(){
+
+		var oBtn = document.getElementById('test');
+		oBtn.onclick = function(){
+			//打开浏览器
+				// 1.创建ajax对象 ie6 ActitiveXObject('Mircrosoft.XMLHTTP');
+				var xhr = null;
+				 try{
+
+					xhr = new XMLHttpRequest();
+
+
+				 }catch(e){
+				 	
+					xhr = new ActitiveXObject('Mircrosoft.XMLHTTP');
+
+				 }
+			//输入地址 放入大象
+			xhr.open('get','1.txt',true);
+			// 提交
+			xhr.send();
+			//等待返回 关门
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState ==4){
+
+					alert(xhr.responseText);
+				}
+			}
+
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<input type="button" placeholder="" value="确定" id="test">
+</bod
+</html>

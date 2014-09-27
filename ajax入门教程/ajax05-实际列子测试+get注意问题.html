@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+	<script>
+	window.onload =  function(){
+
+
+
+		var oBtn = document.getElementById('test');
+		oBtn.onclick = function(){
+
+
+			//打开浏览器
+				// 1.创建ajax对象 ie6 ActitiveXObject('Mircrosoft.XMLHTTP');
+				var xhr = null;
+				 try{
+
+					xhr = new XMLHttpRequest();
+
+
+				 }catch(e){
+				 	
+					xhr = new ActitiveXObject('Mircrosoft.XMLHTTP');
+
+				 }
+			//输入地址 放入大象
+			xhr.open('get','get.php?username=安澜&age=27',true);
+			// 提交
+			xhr.send();
+			//等待返回 关门
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState ==4){
+					if(xhr.status==200){
+
+					// alert();
+					// console.log(JSON.parse(xhr.responseText).username);
+					alert(JSON.stringify(xhr.responseText));
+		
+				//alert(xhr.responseText);
+					// JSON:对象 IE不支持
+					//JSON key必须是双引号括起
+					//JSON.parse(value);数组	
+
+					}
+					
+				}
+			}
+
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<input type="button" placeholder="" value="提交" id="test">
+</bod
+</html>

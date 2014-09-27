@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+	<script src="js/ajax.js"></script>
+	<script>
+	window.onload =  function(){
+
+
+
+		var oBtn = document.getElementById('test');
+		var newsUl = document.getElementById('newsUl');
+		var str = '';
+		oBtn.onclick = function(){
+
+			ajax('get','getNews.php','',function(data){
+
+
+				var data = JSON.parse(data);
+				console.log('fuck'+data);
+				// console.log(data[0].title);
+				for (var i = 0; i < data.length; i++) {
+
+					str += '<li><a href="#">' + data[i].title + '</a><span>' + data[i].date + '</span></li>'
+
+				};
+				newsUl.innerHTML = str;
+				// alert();
+				//console.log(JSON.parse(xhr.responseText));
+
+			});
+
+		}
+		setInterval(function(){
+
+			ajax('get','getNews.php','',function(data){
+
+
+				var data = JSON.parse(data);
+				
+				// console.log(data[0].title);
+				for (var i = 0; i < data.length; i++) {
+
+					str += '<li><a href="#">' + data[i].title + '</a><span>' + data[i].date + '</span></li>'
+
+				};
+				newsUl.innerHTML = str;
+				// alert();
+				//console.log(JSON.parse(data));
+
+			});
+
+		},1000);
+
+	}
+	</script>
+</head>
+<body>
+	<input type="button" placeholder="" value="提交" id="test">
+	<ul id="newsUl"></ul>
+</bod
+</html>
