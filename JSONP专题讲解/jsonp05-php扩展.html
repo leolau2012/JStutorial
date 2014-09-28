@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+	
+	<script>
+	function fn1(data) {
+
+		var oUl1 = document.getElementById('ul1');
+	
+		
+		var html = '';
+		for (var i = 0; i < data.length; i++) {
+			html += '<li>' + data[i] + '</li>';
+
+		};
+		// console.log(oUl1);
+		oUl1.innerHTML = html;
+
+	}
+
+	function fn2(data) {
+		
+		var oUl2 = document.getElementById('ul2');
+		var html = '';
+		for (var i = 0; i < data.length; i++) {
+			html += '<li>' + data[i] + '</li>';
+
+		};
+		// console.log(oUl1);
+		oUl2.innerHTML = html;
+
+}
+function fn3(data) {
+	var oUl3 = document.getElementById('ul3');
+
+	var html = '';
+	for (var i = 0; i < data.length; i++) {
+		html += '<li>' + data[i] + '</li>';
+
+	};
+	// console.log(oUl1);
+	oUl3.innerHTML = html;
+
+}
+	</script>
+	<script>
+	window.onload = function(){
+
+		var oBtn = document.getElementById('test');
+		var oBtn2 = document.getElementById('test2');
+		var oBtn3 = document.getElementById('test3');
+		oBtn.onclick = function(){
+
+			var Oscript = document.createElement('script');;
+			Oscript.src = 'getData.php';
+			document.body.appendChild(Oscript);
+		}
+		oBtn2.onclick = function(){
+
+			var Oscript = document.createElement('script');;
+			Oscript.src = 'getData.php?t=str&callback=fn2';
+			document.body.appendChild(Oscript);
+		}		
+		oBtn3.onclick = function(){
+
+			var Oscript = document.createElement('script');;
+			Oscript.src = 'getData.php?t=num&callback=fn3';
+			document.body.appendChild(Oscript);
+		}
+
+	}
+
+	</script>
+		
+
+</head>
+<body>
+
+	<input type="submit" placeholder="" value="加载数字" id="test">
+	<input type="submit" placeholder="" value="加载字母" id="test2">
+	<input type="submit" placeholder="" value="加载数字" id="test3">
+	<ul id="ul1"></ul>
+	<ul id="ul2"></ul>
+	<ul id="ul3"></ul>
+</body>
+</html>

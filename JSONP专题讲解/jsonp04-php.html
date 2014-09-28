@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+	
+	<script>
+	function fn(data) {
+			
+			var oUl1 = document.getElementById('ul1');
+			var html = '';
+			for (var i = 0; i < data.length; i++) {
+				html+='<li>'+data[i]+'</li>';
+
+			};
+			// console.log(oUl1);
+			oUl1.innerHTML=html;
+
+	}
+	</script>
+	<script>
+	window.onload = function(){
+
+		var oBtn = document.getElementById('test');
+		oBtn.onclick = function(){
+
+			var Oscript = document.createElement('script');;
+			Oscript.src = 'getData.php';
+			document.body.appendChild(Oscript);
+		}
+
+	}
+
+	</script>
+		
+
+</head>
+<body>
+
+	<input type="submit" placeholder="" value="提交" id="test">
+	<ul id="ul1"></ul>
+</body>
+</html>

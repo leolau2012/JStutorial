@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+	<script>
+	window.onload =  function(){
+
+		var oBtn = document.getElementById('test');
+		oBtn.onclick = function(){
+			//打开浏览器
+				// 1.创建ajax对象 ie6 ActitiveXObject('Mircrosoft.XMLHTTP');
+				var xhr = null;
+				 try{
+
+					xhr = new XMLHttpRequest();
+
+
+				 }catch(e){
+				 	
+					xhr = new ActitiveXObject('Mircrosoft.XMLHTTP');
+
+				 }
+			//输入地址 
+			//测试跨域APIhttp://www.douban.com/service/apidoc/reference/subject#搜索书籍电影音乐
+			xhr.open('get','http://api.douban.com/v2/movie/search?q={变形金刚}',true);
+			// 提交
+			xhr.send();
+			//等待返回 关门
+			xhr.onreadystatechange = function(){
+					if(xhr.readyState ==4){
+						if(xhr.status==200){
+						alert(xhr.responseText);
+					}else{
+						console.log('出错了'+xhr.status);
+						//status 0表示服务器
+						// 请求已经发出，但是由于服务器对接收到的请求并没有应答，因此我们并没有得到服务器的响应状态
+
+					}
+				}
+			}
+
+		}
+
+	}
+	</script>
+</head>
+<body>
+	
+	<input type="submit" placeholder="" value="提交" id="test">
+	
+</body>
+</html>

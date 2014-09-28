@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+
+	<script>
+	
+	function wpdic(data) {
+
+		var html ='';
+		var oUl = document.getElementById('oUl');
+		//console.log(data.title.$t+':'+data['opensearch:totalResults'].$t+'个');
+		
+		// console.log(data);
+		// var result = '<p>'+data.title.$t+':'+data['opensearch:totalResults'].$t+'个'+'</p>';
+
+		for (var i = 0; i < data['entry'].length; i++) {
+			html+='<li>'+data['entry'][i]['title'].$t;+'</li>'
+		};	
+		oUl.innerHTML = html;
+
+	}
+
+	</script>
+	<script>
+	window.onload = function() {
+		var page = 1;
+		var oInp = document.getElementById('q');
+		var oBtn = document.getElementById('search');
+		var pre = document.getElementById('pre');
+		var next = document.getElementById('next');
+		
+		oBtn.onclick = function() {
+
+			getData(page);
+		}
+
+		pre.onclick = function() {
+
+			page--;
+			if (page < 1) {
+				page = 1;
+				alert('已经是第一页了');
+				return;
+			}
+			getData(page);
+		}
+		next.onclick = function() {
+			// alert(fuck);
+			page++;
+		
+			getData(page);
+		}
+
+
+		function getData(page) {
+			var timestamp3 = new Date().getTime();
+			var Oscript = document.createElement('script');
+			Oscript.src = 'http://api.douban.com/book/subjects?q='+oInp.value+'&start-index=' + page*2 + '&max-results=2&alt=xd&callback=wpdic&'+timestamp3;
+			document.body.appendChild(Oscript);
+
+		}
+
+
+	}
+
+	</script>
+		
+
+</head>
+<body>
+
+	<input type="text" id="q">
+	<input type="button" id="search" value="搜索">
+	<input type="button" id="pre" value="上一页">
+	<input type="button" id="next" value="下一页">
+	<ul id="oUl"></ul>
+
+<div>
+</body>
+</html>

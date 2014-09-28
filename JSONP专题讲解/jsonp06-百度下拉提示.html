@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+	<style>
+		*{ margin: 0; padding: 0; border: 0;}
+		ul,li,a{ list-style: none; text-decoration: none;}
+		#keywordsTips{ margin: 20px;}
+		#q{
+
+			width: 300px;
+			height: 30px;
+			line-height: 30px;
+			border: 1px #333 solid;
+		}
+		#navigation{
+			width:300px;
+			border: 1px red solid;
+			line-height: 30px;
+			display: none;
+
+		}
+		#navigation  li a:link,#navigation li a:visited{
+
+			
+			display: block;
+		}
+		#navigation  li a:hover{background: yellow;}
+		
+
+	</style>
+	<script>
+	
+	function wpdic(data) {
+
+		var navigation =document.getElementById('navigation');
+		
+		if(data.s.length){
+			
+			console.log(data.s.length);
+			navigation.style.display = 'block';
+			html = '';
+			for (var i = 0; i < data.s.length; i++) {
+				
+				html+='<li><a href="http://www.baidu.com/s?wd='+data.s[i]+'">'+data.s[i]+'</a></li>';
+			};
+			navigation.innerHTML = html;
+		}else{
+
+				navigation.style.display = 'none';
+
+		}
+
+
+	}
+	
+	</script>
+	<script>
+	window.onload = function(){
+
+		var oInp = document.getElementById('q');
+		oInp.onkeyup = function(){
+		// console.log(oInp.value);
+		
+		var Oscript = document.createElement('script');
+		Oscript.src = 'http://suggestion.baidu.com/su?wd='+this.value+'&cb=wpdic';
+		document.body.appendChild(Oscript);
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		                x
+		                ?.z..x //Z/
+	
+
+	}
+
+	</script>
+		
+
+</head>
+<body>
+	<div id="keywordsTips">
+	<input type="text" id="q">
+	<div id="navigation">
+
+	</div>
+<div>
+</body>
+</html>
