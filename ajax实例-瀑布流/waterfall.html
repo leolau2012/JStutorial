@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流</title>
+    <style>
+    body{ margin: 0 auto; text-align: center;}
+    #waterfall {
+        width: 940px;
+        margin: 0 auto;
+        border: 1px solid red;
+    }
+    #waterfall li {
+        width: 220px;
+        float: left;
+        list-style: none;
+        margin-right: 10px;
+    }
+    #waterfall li img {
+        width: 220px;
+    }
+    #water div {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    </style>
+    <script src="js/ajax.js"></script>
+    <script>
+    	window.onload = function(){
+            var oUl = document.getElementById('waterfall');
+            var aLi = oUl.getElementsByTagName('li');
+            var iLen = aLi.length;
+            var ipage = 1;
+            var flag = true;
+            getList();
+            function getList() {
+
+                ajax('get', 'getPic.php', 'cpage='+ipage, function(data) {
+                    var data = JSON.parse(data);
+                    // console.log(data);
+                    if(!data.length){return;}
+                    for (var i = 0; i < data.length; i++) {
+                        //获取高度最短的li
+                        var _index = getShort();
+                        // console.log('aaa'+data[49]);
+                        var oDiv = document.createElement('div');
+                        var oImg = document.createElement('img');
+                        var oP = document.createElement('p');
+                        oImg.src = data[i].preview;
+                        oImg.style.width = '220px';
+                        oImg.style.height = data[i].height * (220 / data[i].width);
+                        oP.innerHTML = data[i].title;
+
+                        oDiv.appendChild(oImg);
+                        oDiv.appendChild(oP);
+                        aLi[_index].appendChild(oDiv);
+
+                    };
+                    flag = true;
+
+
+                });
+            }
+
+            window.onscroll = function(){
+
+                // 滚动加载，原理：当最短的那一列的li的底部是否进入可视区，判断方法最短一列li
+                
+                var _index = getShort(aLi);
+                var ih = aLi[_index].offsetHeight;
+                var oLi = aLi[_index];
+                var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+                if(getTop(oLi)+ih<document.documentElement.clientHeight+scrollTop){
+                    if(flag){
+                        flag = false;
+                        ipage++;
+                        getList();
+
+
+                    }
+
+                }
+
+               
+            }
+
+            function getShort() {
+
+
+                var index = 0;
+                var ih = aLi[index].offsetHeight;
+
+                for (var i = 0; i < iLen; i++) {
+
+
+                    if(aLi[i].offsetHeight<ih){
+
+                            index = i;
+                            console.log(index);
+                            ih = aLi[i].offsetHeight;
+
+                    }
+                    
+                   
+                };
+                return index;
+            }
+
+            function getTop(obj){
+
+                var iTop = 0;
+                while(obj){
+
+                    iTop+=obj.offsetTop;
+                    obj = obj.offsetParent;
+
+                }
+                return iTop;
+            }
+    	}
+    </script>
+</head>
+
+<body>
+    <ul id="waterfall">
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+
+    </ul>
+</body>
+
+</html>
