@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>运动框架01</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+    #div1{width: 100px;height: 100px;position: absolute;background: red; left: 0;}
+</style>
+
+<script>
+    window.onload  =function(){
+  
+    var oDiv1 =document.getElementById('div1'); 
+     var oBtn = document.getElementById('btn');
+     var timer = null;
+      oBtn.onclick  = function(){
+
+              startMove();
+      }
+
+       function startMove() {
+
+        clearInterval(timer);
+
+        timer = setInterval(function() {
+            if(oDiv1.offsetLeft >=500){
+
+                clearInterval(timer);
+            }else{
+                // console.log(oDiv1.style.left);
+            oDiv1.style.left =oDiv1.offsetLeft+10+'px';
+                
+            }
+           
+        }, 30);
+
+    }
+
+       
+   }
+
+</script>
+</head>
+<body>
+    <input type="button" value="移动" id="btn">
+    <div id="div1"></div>
+</body>
+</html>

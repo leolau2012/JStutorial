@@ -1,0 +1,6 @@
+ul,li{ list-style-type:none; margin: 0; padding: 0;}
+body{ text-align: center; margin:0 auto;}
+#iphone{background:url(../images/bg.png) no-repeat; width: 900px; height: 600px; position: absolute; left: 50%; margin-left:-450px; top: 0;}
+#wrap{ width: 240px; height: 361px; overflow: hidden;margin: 0 auto; position: absolute; left:326px; top: 120px;}
+#list{ width: 960px; position: absolute; left: 0; top: 0;}
+#iphone ul li{ float: left;}

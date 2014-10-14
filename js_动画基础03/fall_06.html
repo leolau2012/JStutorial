@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自由落体运动</title>
+	<style>
+		#div1{background:red; width: 100px; height: 100px; position:absolute; left: 0; top:440px;}
+	</style>
+	<script>
+                window.onload = function() {
+                  var oDiv = document.getElementById( 'div1' );
+                  var iSpeedY = 30;
+                  var iSpeedX = 30;
+                  var timer = null;
+                  startMove();
+
+                  function startMove() {
+                  clearInterval(timer);
+                   timer= setInterval( function() {
+                      iSpeedY+=3;
+          
+                      var T = oDiv.offsetTop + iSpeedY;
+                      var L = oDiv.offsetLeft + iSpeedX;
+                      if ( T > document.documentElement.clientHeight - oDiv.offsetHeight ) {
+                        T = document.documentElement.clientHeight - oDiv.offsetHeight;
+                        iSpeedY *= -1;
+                        console.log(iSpeedY);
+                      }
+                     if ( L > document.documentElement.clientWidth - oDiv.offsetWidth ) {
+                        L= document.documentElement.clientWidth - oDiv.offsetWidth;
+                        iSpeedX =0;
+                      }
+                      if(Math.abs(iSpeedX<1)&&Math.abs(iSpeedY<1)){
+                          T = document.documentElement.clientHeight - oDiv.offsetHeight;
+                          clearInterval(timer);
+
+                      }
+                      oDiv.style.top = T + 'px';
+                      oDiv.style.left = L + 'px';
+
+                    }, 30 );
+                  }
+                }
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

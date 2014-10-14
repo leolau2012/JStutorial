@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>图片预加载</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+    #wrap{ height: 2000px;}
+    #backTop{ width: 100px; height: 100px; background: red; position: absolute; bottom: 10px; right: 10px;}
+</style>
+<script src="js/move.js"></script>
+<script>
+    window.onload = function(){
+        var iCur = 0;
+        var i = 0;
+        var oImg = new Image();
+        var arr =[
+            
+            'http://d.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=11903f0061d0f703e6b291df3ecc6a5e/f636afc379310a55289ab7e3b44543a98226106e.jpg',
+            'http://f.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=8c762ed781025aafd3327ac8cddb9007/a686c9177f3e670994582de838c79f3df8dc5548.jpg',
+            'http://d.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=5c9390029e16fdfad86cc2ed82b9b737/37d3d539b6003af3c1fbb749362ac65c1038b652.jpg',
+            'http://e.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=b20c27ae9d510fb378197394ef05f3f6/838ba61ea8d3fd1f15f5cb2d334e251f95ca5f2c.jpg',
+            'http://b.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=2ac4ed369013b07ebdbd540b3ae1aa40/09fa513d269759eeec5b0adcb1fb43166d22df9a.jpg',
+            'http://f.hiphotos.baidu.com/image/w%3D1366%3Bcrop%3D0%2C0%2C1366%2C768/sign=9a855db3da33c895a67e9c78e7254893/4034970a304e251f006bcedca486c9177f3e5371.jpg',
+            'http://pica.nipic.com/2007-12-18/200712189215503_2.jpg'
+        ];
+
+        var img1 = document.getElementById('img1');
+         xunlei();
+        img1.onclick = function(){
+
+                if(i<arr.length){
+                 i++;//这句话应该放在下面才能保证上面的图片取值从0，1，2，3，4，5，6，否则会存在arr[7] 未定义错误
+                 console.log(i);
+                 img1.src=arr[i];
+             }
+               
+        }
+        
+        function xunlei(){
+           oImg.src =arr[iCur];
+           oImg.onload = function(){
+                iCur++;
+                // console.log(arr.length);
+                if(iCur<arr.length){
+                    xunlei();
+                }
+                document.title=iCur;
+           }  
+           
+        }
+
+    }
+
+  
+</script>
+</head>
+<body>
+        <img src="http://img0.bdstatic.com/img/image/9b5e4edc11f1a4f45457f2e5d1c9f0121409119522.jpg" id="img1">
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>缓冲运动05</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+*{margin: 0; padding: 0;}
+    #div1{width: 100px;height: 100px;position: absolute;background: red; left: 500px;}
+}
+</style>
+<script>
+    window.onload = function(){
+        var oDiv1 = document.getElementById('div1');
+        var timer = null;
+        var iSpeed = 0;
+        oDiv1.onclick = function(){
+          
+           startMove(0);
+
+        }
+
+        function startMove(iTarget){
+             clearInterval(timer);
+                 timer= setInterval(function(){
+                 iSpeed =iTarget-oDiv1.offsetLeft>0?Math.ceil((iTarget-oDiv1.offsetLeft)/8):Math.floor((iTarget-oDiv1.offsetLeft)/8); 
+                  oDiv1.style.left=oDiv1.offsetLeft+iSpeed+'px';
+                 console.log(oDiv1.offsetLeft+'----------'+iSpeed);
+                 if(oDiv1.offsetLeft<=iTarget){
+                    clearInterval(timer);
+                }
+            },30);
+        }
+         
+
+    
+        }
+</script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

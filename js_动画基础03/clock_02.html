@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性运动01</title>
+    <style>
+        #div1{ width: 100px; height: 100px; background: red; position: absolute; left: 0px; }
+        #bg{width: 1px; background: black; height: 500px; position: absolute; left: 500px;}
+    </style>
+    <script>
+    window.onload = function(){
+        var oBtn = document.getElementById('btn');
+        var oDiv = document.getElementById('div1');
+        var timer = null;
+        oBtn.onclick = function(){
+           // console.log(oDiv.offsetLeft);
+            clearInterval(timer);
+            var iSpeed = 10;
+            timer = setInterval(function(){
+                    iSpeed+=(500-oDiv.offsetLeft)/8;
+                    iSpeed*=0.75;
+                     if(Math.abs(iSpeed)<=1&&Math.abs(500-oDiv.offsetLeft)<=1){
+                        clearInterval(timer);
+                        oDiv.style.left = '500px';
+                        iSpeed =0;
+                    }else{
+                        oDiv.style.left =oDiv.offsetLeft+iSpeed+'px';
+                    }
+                    console.log(oDiv.style.left+','+iSpeed);
+
+            },30);
+           
+        }
+    }
+    </script>
+</head>
+<body>
+    <input type="button" value="确定" id="btn">
+    <div id="div1"></div>
+    <div id="bg"></div>
+</body>
+</html>

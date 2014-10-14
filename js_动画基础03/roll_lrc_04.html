@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性运动01</title>
+    <style>
+        #div1,#div2{ position: absolute; left: 0; color: black; height: 16px;overflow: 
+            hidden;}
+        #div2{ color: red; width: 15px; overflow: hidden;height: 16px;}
+        #div2 span{ width: 2000px; position: absolute;left: 0;height: 16px; display:block;}
+    </style>
+    <script>
+    window.onload = function(){
+        var oDiv1 = document.getElementById('div1');
+        var oDiv2 = document.getElementById('div2');
+        var oSpan = document.getElementsByTagName('span')[0];
+        var timer = null;
+        timer = setInterval(function(){
+            oDiv2.style.left = oDiv2.offsetLeft+1+'px';
+            oSpan.style.left = -oDiv2.offsetLeft+'px';
+                    console.log(oSpan.offsetLeft);
+
+
+        },30);
+    }
+    </script>
+</head>
+<body>
+    <div id="div1">那片笑声让我想起我的那些花儿</div>
+    <div id="div2"><span>那片笑声让我想起我的那些花儿</span></div>
+</body>
+</html>

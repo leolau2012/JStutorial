@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性运动01</title>
+    <style>
+        ul,li{ list-style-type: none; padding: 0; margin: 0;}
+        #ul1{ position: relative; width: 500px;}
+       #ul1 li{ height: 30px; line-height:30px; background: red;  float: left; margin-right:5px; padding:10px; width: 100px; text-align: center; }
+         #mask{ height: 30px; line-height:30px;  position: absolute; left: 0; padding:10px; width: 100px;overflow: hidden;}
+         #ul1 ul{ width: 500px;  position: absolute; left: 0px; top: 0;  color: #fff;z-index: 1; }
+         /*#ul1 ul li{background: red;}*/
+
+    </style>
+    <script>
+    window.onload = function(){
+        var oMask = document.getElementById('mask');
+        var ul1 = document.getElementById('ul1');
+        var aBox = ul1.getElementsByClassName('box');
+        var oMaskUl =oMask.getElementsByTagName('ul')[0];
+        var timer1 = null;
+        var timer2 = null;
+
+        for (var i = 0; i < aBox.length; i++) {
+
+            aBox[i].onmouseover = function(){
+                clearInterval(timer2);
+                startMove(this.offsetLeft);  
+            }
+            aBox[i].onmouseout = function(){
+               timer2 = setTimeout(function(){
+                    startMove(0);  
+               },100);
+            }
+        };
+        function startMove(iTarget){
+          
+            clearInterval(timer1);
+            var iSpeed = 10;
+            timer1 = setInterval(function(){
+                    iSpeed+=(iTarget-oMask.offsetLeft)/8;
+                    iSpeed*=0.75;
+                     if(Math.abs(iSpeed)<=1&&Math.abs(iTarget-oMask.offsetLeft)<=1){
+                        clearInterval(timer1);
+                        oMask.style.left = iTarget+'px';
+                        iSpeed =0;
+                        oMaskUl.style.left = -iTarget+'px';
+                    }else{
+                         oMask.style.left =oMask.offsetLeft+iSpeed+'px';
+                         oMaskUl.style.left = -oMask.offsetLeft+'px';//使用这句话会有轻微的抖动
+                         // oMaskUl.style.left = -(oMask.offsetLeft+iSpeed)+'px';
+                    }
+                    oMask.onmouseover = function(){
+                        clearInterval(timer2);
+                    }
+                    oMask.onmouseout = function(){
+                        clearInterval(timer2);
+                        timer2 = setTimeout(function(){
+                             startMove(0);  
+                        },100);
+                    }
+
+            },30);
+        }
+    }
+    </script>
+</head>
+<body>
+<ul id="ul1">
+        <li id="mask">
+            <ul>
+                <li>首页</li>
+                <li>论坛</li>
+                <li>视频</li>
+                <li>联系我们</li>
+            </ul>
+        </li>
+        <li class="box">首页</li>
+        <li class="box">论坛</li>
+        <li class="box">视频</li>
+        <li class="box">联系我们</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>运动的留言板</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+    #wrap{ height: 2000px;}
+    #backTop{ width: 100px; height: 100px; background: red; position: absolute; bottom: 10px; right: 10px;}
+</style>
+<script src="js/move.js"></script>
+<script>
+    window.onload = function(){
+
+        var backBtn = document.getElementById('backTop');
+        var timer = null;
+        backBtn.style.right = '10px';
+        backBtn.style.bottom = '10px';
+         setTop();
+         var b =0;
+        window.onscroll = function(){
+            if(b!=1){
+                clearInterval(timer);
+            }
+            b=2;
+             setTop();
+
+        }
+        backBtn.onclick =function(){
+
+            timer = setInterval(function(){
+
+                    var iSpeed= iCur  = 0;
+                    iCur = document.documentElement.scrollTop||document.body.scrollTop;
+                    iSpeed  =Math.floor((0-iCur)/8);
+                    if (iCur==0) {
+                        clearInterval(timer);
+                    } else{
+                        document.documentElement.scrollTop=document.body.scrollTop=iCur+iSpeed;
+                    };
+                    b=1;
+                
+            },30);
+        }
+        function setTop(){
+            var scrollTop =document.documentElement.scrollTop||document.body.scrollTop;
+            backBtn.style.top = scrollTop+document.documentElement.clientHeight-backBtn.offsetHeight+'px';
+        
+    }
+
+ }
+
+  
+</script>
+</head>
+<body>
+    <div id="wrap"></div>
+    <div id="backTop"></div>
+</body>
+</html>

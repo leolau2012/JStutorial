@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>多图展开收缩</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    *{margin: 0; padding: 0;}
+    body{ text-align: center; margin: 0 auto;}
+    li{ width: 100px;height: 100px; float: left; list-style-type: none; background: red;margin: 10px 0px 0 10px;}
+    ul{ width: 330px;text-align: center; margin: 0 auto;margin-top: 100px; position: relative; border: 1px solid red; }
+</style>
+<script src="js/move.js"></script>
+<script>
+    window.onload = function(){
+        var aLi = document.getElementsByTagName('li');
+        var pos = [];
+        for (var i = 0; i < aLi.length; i++) {
+            console.log('0');
+            pos.push({left:aLi[i].offsetLeft,top:aLi[i].offsetTop});
+        };
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].style.zIndex = 0;
+            aLi[i]._index = i;
+            aLi[i].style.left=pos[i].left +'px';
+             aLi[i].style.top=pos[i].top+'px';
+             aLi[i].style.position= 'absolute';
+             aLi[i].style.margin = 0;
+             aLi[i].onmouseover =function(){
+                // alert(pos[i].left );
+                this.style.zIndex ++;
+                this.style.background = 'green';
+                // this.style.left=pos[this._index].left - 50 +'px';
+                // this.style.top=pos[this._index].top - 50+'px';
+                // this.style.width='200px';
+                // this.style.height = '200px';
+                startMove(this,{
+                    width:200,
+                    height:200,
+                    left:pos[this._index].left - 50,
+                    top:pos[this._index].top - 50
+
+                });
+             }
+
+               aLi[i].onmouseout =function(){
+                // alert(pos[i].left );
+                this.style.zIndex ++;
+                this.style.background = 'green';
+                // this.style.left=pos[this._index].left - 50 +'px';
+                // this.style.top=pos[this._index].top - 50+'px';
+                // this.style.width='200px';
+                // this.style.height = '200px';
+                startMove(this,{
+                    width:100,
+                    height:100,
+                    left:pos[this._index].left,
+                    top:pos[this._index].top
+
+                });
+             }
+
+
+        };
+    }
+</script>
+</head>
+<body>
+
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    
+</body>
+</html>

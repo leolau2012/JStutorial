@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>运动的留言板</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+    #message{ position: absolute; right: 10px; width: 700px; height: 500px;top: 0; list-style-type: none; 
+      overflow:auto; border: 1px solid #ccc; }
+       #message li{ border-bottom: 1px dashed #ccc;line-height: 28px;word-wrap:break-word;overflow: hidden;}
+</style>
+<script src="js/move.js"></script>
+<script>
+    window.onload = function(){
+
+        var oBtn = document.getElementById('btn');
+        var oUl = document.getElementById('message');
+        var note = document.getElementById('note');
+        oBtn.onclick = function(){
+            var oLi = document.createElement('li');
+            oLi.innerHTML = note.value;
+            if (oUl.childNodes[0]) {
+                oUl.insertBefore(oLi, oUl.childNodes[0]);
+            } else{
+               oUl.appendChild(oLi);
+            };
+            var iHeight = parseInt(css(oLi,'height'));
+            oLi.style.height='0px';
+            oLi.style.opacity = '0';
+            oLi.style.filter='alpha(opacity=0)';
+            startMove(oLi,{
+                height:iHeight,
+                opacity:100
+            });
+
+        }
+    }
+</script>
+</head>
+<body>
+    <textarea cols="50" rows="10" id="note"></textarea>
+    <input type="button" value="留言" id="btn">
+    <ul id="message">
+
+    </ul>
+</body>
+</html>

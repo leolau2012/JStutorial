@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>京东幻灯效果</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+    ul,li{margin: 0;padding: 0;}
+    #banner{ width: 670px; height: 240px; border: 1px solid #ccc; position: relative;overflow:hidden;}
+    #imgWrap{ position: absolute; left: 0; top: 0;}
+    #banner img{  float: left; width: 670px; position: relative;}
+    .slide-controls{
+            position: absolute;
+            z-index: 10;
+            bottom: 5px;
+            right: 10px;
+    }
+    .slide-controls span{ 
+        display: inline-block;
+        margin: 0 1px;
+        background: #999;
+        text-align: center;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 12px;
+        -moz-border-radius: 12px;
+        -webkit-border-radius: 12px;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+
+    }
+    .slide-controls .curr {
+          background: #E4393C;
+    }
+</style>
+<script src="js/move.js"></script>
+<script>
+    window.onload = function(){
+
+        var oUl = document.getElementById('imgWrap');
+        var aImg = oUl.getElementsByTagName('img');
+        var aSpan = document.getElementsByTagName('span');
+        oUl.style.width = aImg[0].offsetWidth*aSpan.length+'px';
+        for (var i = 0; i < aSpan.length; i++) {
+            aSpan[i]._index = i;
+            aSpan[i].onclick = function(){
+                for (var i = 0; i < aSpan.length; i++) {
+                    aSpan[i].className= '';
+                };
+                aSpan[this._index].className = 'curr';
+                startMove(oUl,{
+                    left:-aImg[0].offsetWidth*this._index
+                });
+               // oUl.style.left = -aImg[0].offsetWidth*this._index+'px';
+
+            }
+        };
+   
+    }
+</script>
+</head>
+<body>
+    <div id="banner">
+        <ul id="imgWrap">
+        <img src="images/1.jpg" alt="" >
+        <img src="images/2.jpg" alt="">
+        <img src="images/3.jpg" alt="">
+        <img src="images/4.jpg" alt="">
+        <img src="images/5.jpg" alt="">
+        <img src="images/6.jpg" alt="">
+        </ul>
+        <div id="slide-controls" class="slide-controls"> 
+        <span>1</span>
+        <span class="curr">2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        </div>
+    </div>
+</body>
+</html>
